@@ -28,6 +28,10 @@ func (a Account) ToNewAccountResponseDto() *dto.NewAccountResposne {
 	return &dto.NewAccountResposne{AccountId: strconv.Itoa(int(a.AccountId))}
 }
 
+func (a Account) CanWithdraw(amount float64) bool {
+	return a.Amount >= amount
+}
+
 func NewAccount(customerId string, accountType string, amount float64) Account {
 	customerIdInt, _ := strconv.Atoi(customerId)
 
@@ -38,4 +42,5 @@ func NewAccount(customerId string, accountType string, amount float64) Account {
 		Amount:      amount,
 		Status:      1,
 	}
+
 }
