@@ -14,7 +14,26 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
+func sanityCheck() {
+	envProps := []string{
+		"SERVER_ADDRESS",
+		"SERVER_PORT",
+		"DB_USER",
+		"DB_ADDR",
+		"DB_PORT",
+		"DB_NAME",
+	}
+
+	for _, k := range envProps {
+		if os.Getenv(k) == "" {
+			logger.Fatal(fmt.Sprintf("Enviroment variable %s not provided ", k))
+		}
+	}
+}
+
 func Start() {
+	sanityCheck()
+
 	router := gin.Default()
 
 	pool := getDBClient()
