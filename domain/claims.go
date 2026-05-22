@@ -23,13 +23,16 @@ func (c AccessTokenClaims) IsUserRole() bool {
 
 func (c AccessTokenClaims) IsValidAccountId(accountId string) bool {
 	if accountId != "" {
+		accountFound := false
 		for _, a := range c.Accounts {
-			if accountId == a {
-				return true
+			if a == accountId {
+				accountFound = true
+				break
 			}
 		}
+		return accountFound
 	}
-	return false
+	return true
 
 }
 

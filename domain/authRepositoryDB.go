@@ -20,7 +20,7 @@ func NewAuthRepositoryDB(pool *pgxpool.Pool) AuthRepositoryDB {
 
 func (a AuthRepositoryDB) FindById(ctx context.Context, userName string, password string) (*User, *errs.AppError) {
 	sqlSelect := `SELECT username, role, u.customer_id, STRING_AGG(a.account_id::text, ',') as account_numbers
- 				  FROM users	u  Join accounts a on u.customer_id = a.customer_id
+ 				  FROM users	u  Left Join accounts a on u.customer_id = a.customer_id
 	              WHERE username=$1 AND password=$2
 				  Group by username,password,role,u.customer_id`
 

@@ -1,14 +1,28 @@
 package domain
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/amrshaban2005/banking-auth/logger"
+)
+
+const (
+	PermissionCustomersReadAll   = "customers:read_all"
+	PermissionCustomersReadOne   = "customers:read_one"
+	PermissionAccountsCreate     = "accounts:create"
+	PermissionTransactionsCreate = "transactions:create"
+)
 
 type RolePermissions struct {
 	rolePermissions map[string][]string
 }
 
-func (r RolePermissions) IsAuthorizedFor(role string, routeName string) bool {
+func (r RolePermissions) IsAuthorizedFor(role string, permissionName string) bool {
+
 	for _, r := range r.rolePermissions[role] {
-		if r == strings.TrimSpace(routeName) {
+		logger.Info(strings.TrimSpace(permissionName))
+		logger.Info(r)
+		if r == strings.TrimSpace(permissionName) {
 			return true
 		}
 	}
@@ -17,8 +31,12 @@ func (r RolePermissions) IsAuthorizedFor(role string, routeName string) bool {
 
 func GetRolePermissions() RolePermissions {
 	return RolePermissions{map[string][]string{
-		"admin": {"GetAllCustomers", "GetCustomer", "NewAccount", "NewTransaction"},
-		"user":  {"GetCustomer", "NewTransaction"},
+		"admin": {PermissionCustomersReadAll,
+			PermissionCustomersReadOne,
+			PermissionAccountsCreate,
+			PermissionTransactionsCreate},
+		"user": {PermissionCustomersReadOne,
+			PermissionTransactionsCreate},
 	}}
 
 }

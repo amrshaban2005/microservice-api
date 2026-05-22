@@ -59,7 +59,7 @@ func (a *DefualtAuthService) Verify(urlParams map[string]string) *errs.AppError 
 					return errs.NewAuthorizationError("request not verified with the token claims")
 				}
 			}
-			if !a.rolePermissions.IsAuthorizedFor(claims.Role, urlParams["routeName"]) {
+			if !a.rolePermissions.IsAuthorizedFor(claims.Role, urlParams["permissionName"]) {
 				return errs.NewAuthorizationError(fmt.Sprintf("%s role is not authorized", claims.Role))
 			}
 			return nil

@@ -33,7 +33,7 @@ func (a AuthHandler) Login(c *gin.Context) {
 /*
 	Sample URL string
 
-http://localhost:8181/auth/verify?token=somevalidtokenstring&routeName=GetCustomer&customer_id=2000&account_id=95470
+http://localhost:8181/auth/verify?token=somevalidtokenstring&permissionName=GetCustomer&customer_id=2000&account_id=95470
 */
 func (a AuthHandler) Verify(c *gin.Context) {
 	urlParams := make(map[string]string)
