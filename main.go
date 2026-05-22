@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/amrshaban2005/microservice-api/app"
+	"github.com/amrshaban2005/banking-auth/app"
 )
 
-func main(){
+func main() {
 	app.Start()
 }

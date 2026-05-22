@@ -2,36 +2,48 @@ package errs
 
 import "net/http"
 
-
 type AppError struct {
-	Code int `json:",omitempty"`
+	Code    int    `json:",omitempty"`
 	Message string `json:"message"`
 }
 
-func (e AppError) AsMessage() *AppError{
+func (e AppError) AsMessage() *AppError {
 	return &AppError{
 		Message: e.Message,
 	}
 }
 
-func NewNotFoundError(message string) *AppError{
+func NewNotFoundError(message string) *AppError {
 	return &AppError{
-		Code: http.StatusNotFound,
+		Code:    http.StatusNotFound,
 		Message: message,
 	}
 }
 
-func NewUnexpectedError(message string) *AppError{
+func NewUnexpectedError(message string) *AppError {
 	return &AppError{
-		Code: http.StatusInternalServerError,
+		Code:    http.StatusInternalServerError,
 		Message: message,
 	}
 }
 
-func NewValidationError(message string) *AppError{
+func NewValidationError(message string) *AppError {
 	return &AppError{
-		Code: http.StatusUnprocessableEntity,
+		Code:    http.StatusUnprocessableEntity,
 		Message: message,
 	}
 }
 
+func NewAuthenticationError(message string) *AppError {
+	return &AppError{
+		Message: message,
+		Code:    http.StatusUnauthorized,
+	}
+}
+
+func NewAuthorizationError(message string) *AppError {
+	return &AppError{
+		Message: message,
+		Code:    http.StatusForbidden,
+	}
+}

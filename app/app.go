@@ -7,9 +7,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/amrshaban2005/microservice-api/domain"
-	"github.com/amrshaban2005/microservice-api/logger"
-	"github.com/amrshaban2005/microservice-api/service"
+	"github.com/amrshaban2005/banking-auth/domain"
+	"github.com/amrshaban2005/banking-auth/logger"
+	"github.com/amrshaban2005/banking-auth/service"
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -38,16 +38,13 @@ func Start() {
 
 	pool := getDBClient()
 
-	customerRepositoryDB := domain.NewCustomerRepositoryDB(pool)
-	accountRepositoryDB := domain.NewAccountRepositoryDB(pool)
+	authRepositoryDB := domain.NewAuthRepositoryDB(pool)
+	rolePermissions := domain.GetRolePermissions()
 
-	ch := &CustomerHandler{service.NewCustomerService(customerRepositoryDB)}
-	ah := &AccountHandler{service.NewAccountService(accountRepositoryDB)}
+	ah := &AuthHandler{service.NewAuthService(authRepositoryDB, rolePermissions)}
 
-	router.GET("/customers", ch.GetAllCustomers)
-	router.GET("/customers/:id", ch.GetCustomer)
-	router.POST("/customers/:id/account", ah.NewAccount)
-	router.POST("/customers/:id/account/:account_id", ah.MakeTransaction)
+	router.GET("auth/login", ah.Login)
+	router.GET("auth/verify", ah.Verify)
 
 	// starting the server
 	address := os.Getenv("SERVER_ADDRESS")
