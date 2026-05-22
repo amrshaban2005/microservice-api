@@ -44,10 +44,11 @@ func Start() {
 	ch := &CustomerHandler{service.NewCustomerService(customerRepositoryDB)}
 	ah := &AccountHandler{service.NewAccountService(accountRepositoryDB)}
 
-	router.GET("/customers", ch.GetAllCustomers)
-	router.GET("/customers/:id", ch.GetCustomer)
-	router.POST("/customers/:id/account", ah.NewAccount)
-	router.POST("/customers/:id/account/:account_id", ah.MakeTransaction)
+	am := AuthMiddleware{domain.NewRemoteAuthRepository()}
+	router.GET("/customers", am.authorizationHandler("customers:read_all"), ch.GetAllCustomers)
+	router.GET("/customers/:id", am.authorizationHandler("customers:read_one"), ch.GetCustomer)
+	router.POST("/customers/:id/account", am.authorizationHandler("accounts:create"), ah.NewAccount)
+	router.POST("/customers/:id/account/:account_id", am.authorizationHandler("transactions:create"), ah.MakeTransaction)
 
 	// starting the server
 	address := os.Getenv("SERVER_ADDRESS")
