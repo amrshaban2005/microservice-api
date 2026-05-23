@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/amrshaban2005/microservice-api/logger"
+	"github.com/amrshaban2005/banking-lib/logger"
 )
 
 type AuthRepository interface {

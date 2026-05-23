@@ -5,8 +5,8 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/amrshaban2005/microservice-api/errs"
-	"github.com/amrshaban2005/microservice-api/logger"
+	"github.com/amrshaban2005/banking-lib/errs"
+	"github.com/amrshaban2005/banking-lib/logger"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )

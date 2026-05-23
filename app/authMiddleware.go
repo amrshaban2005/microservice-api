@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/amrshaban2005/microservice-api/domain"
-	"github.com/amrshaban2005/microservice-api/errs"
+	"github.com/amrshaban2005/banking-lib/errs"
 	"github.com/gin-gonic/gin"
 )
 

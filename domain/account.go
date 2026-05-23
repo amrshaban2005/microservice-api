@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/amrshaban2005/microservice-api/dto"
-	"github.com/amrshaban2005/microservice-api/errs"
+	"github.com/amrshaban2005/banking-lib/errs"
 )
 
 type Account struct {

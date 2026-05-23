@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/amrshaban2005/microservice-api/dto"
-	"github.com/amrshaban2005/microservice-api/logger"
+	"github.com/amrshaban2005/banking-lib/logger"
 	"github.com/amrshaban2005/microservice-api/service"
 	"github.com/gin-gonic/gin"
 )

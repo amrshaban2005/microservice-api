@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 
+	"github.com/amrshaban2005/banking-lib/errs"
 	"github.com/amrshaban2005/microservice-api/domain"
 	"github.com/amrshaban2005/microservice-api/dto"
-	"github.com/amrshaban2005/microservice-api/errs"
 )
 
 type AccountService interface {

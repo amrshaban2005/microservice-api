@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/amrshaban2005/microservice-api/errs"
+import "github.com/amrshaban2005/banking-lib/errs"
 
 const DEPOSIT = "deposit"
 const WITHDRAW = "withdraw"

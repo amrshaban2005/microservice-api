@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/amrshaban2005/microservice-api/domain"
-	"github.com/amrshaban2005/microservice-api/logger"
+	"github.com/amrshaban2005/banking-lib/logger"
 	"github.com/amrshaban2005/microservice-api/service"
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v5/pgxpool"
